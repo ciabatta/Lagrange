@@ -1,0 +1,231 @@
+'ROW  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99100101102103104105106107
+
+DATA 00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,05,00,05,00,00,00,00,00,00,00,00,15,00,00,00,00,00,00,00,00,00,00,00,00,00,05,00,00,00,05,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,06,05,06,00,00,00,00,00,00,00,15,14,15,00,00,00,00,00,00,00,00,00,00,00,06,05,05,00,05,05,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,06,05,06,00,00,00,00,00,00,00,00,15,00,00,00,00,00,00,00,00,00,02,00,06,05,06,00,00,00,06,05,06,00,02,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,02,00,06,05,06,00,02,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,02,00,06,05,06,00,00,00,00,00,06,05,06,00,02,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,02,00,06,05,06,00,02,00,00,00,00,00,00,14,00,00,00,00,00,00,00,02,02,06,05,06,00,00,00,00,00,00,00,06,05,06,02,02,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,03,02,02,06,05,06,02,02,03,00,00,00,00,14,15,14,00,00,00,00,00,02,02,06,05,06,00,02,00,00,00,00,00,02,00,06,05,06,02,02,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,03,03,02,03,06,05,06,03,02,03,03,00,00,00,00,14,00,00,00,00,00,00,02,06,05,06,02,02,00,00,00,00,00,00,00,02,02,06,05,06,02,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,03,03,00,00,03,02,06,02,03,00,00,03,03,00,00,00,00,00,00,00,00,00,03,02,06,05,06,02,02,00,00,00,00,00,00,00,02,02,06,05,06,02,03,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,04,03,00,00,00,04,03,03,03,04,00,00,00,03,04,00,00,00,00,00,00,00,00,03,02,02,05,02,02,03,00,00,00,00,00,00,00,03,02,02,05,02,02,03,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,04,04,00,00,00,00,04,03,04,00,00,00,00,04,04,00,00,00,00,00,00,00,03,04,03,03,02,02,03,03,03,00,00,00,00,00,03,03,03,02,02,03,03,04,03,00,00,00,00,00,00,00,00,00,00
+DATA 00,04,04,04,00,00,00,00,04,00,00,00,00,04,04,04,00,00,00,00,00,00,04,00,04,04,03,04,03,03,04,03,00,00,00,00,00,03,04,03,03,04,03,04,04,00,04,00,00,00,00,00,00,00,00,00
+DATA 00,00,04,04,00,00,00,04,04,04,00,00,00,04,04,00,00,00,00,00,00,04,04,00,00,00,04,04,04,04,04,04,04,00,00,00,04,04,04,04,04,04,04,00,00,00,04,04,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,14,00,14,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,14,00,00,14,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,00,14,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,05,14,14,14,14,05,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,05,14,05,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,06,05,05,00,00,05,05,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,06,05,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,02,00,06,05,06,00,00,00,00,06,05,06,00,02,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,00,00,06,05,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,02,00,06,05,06,00,00,00,00,00,00,06,05,06,00,02,00,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,02,00,06,05,06,00,02,00,00,00,00,00,00,00,00,00,00,00,00,00,00,02,02,06,05,06,00,00,00,00,00,00,00,00,06,05,06,02,02,00,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,00,02,00,06,05,06,00,02,00,00,00,00,00,00,00,00,00,00,00,00,00,02,02,06,05,06,00,02,00,00,00,00,00,00,02,00,06,05,06,02,02,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,00,03,02,02,06,05,06,02,02,03,00,00,00,00,00,00,00,00,00,00,00,00,02,06,05,06,02,02,00,00,00,00,00,00,00,00,02,02,06,05,06,02,00,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,00,03,03,02,03,06,05,06,03,02,03,03,00,00,00,00,00,00,00,00,00,00,03,02,06,05,06,02,02,00,00,00,00,00,00,00,00,02,02,06,05,06,02,03,00,00,00,00,00,00,00,00,00,00
+DATA 00,00,03,03,00,00,03,02,06,02,03,00,00,03,03,00,00,00,00,00,00,00,00,00,03,02,02,05,02,02,03,00,00,00,00,00,00,00,00,03,02,02,05,02,02,03,00,00,00,00,00,00,00,00,00,00
+DATA 00,04,03,00,00,00,04,03,03,03,04,00,00,00,03,04,00,00,00,00,00,00,00,03,04,03,03,02,02,03,03,03,00,00,00,00,00,00,03,03,03,02,02,03,03,04,03,00,00,00,00,00,00,00,00,00
+DATA 00,04,04,00,00,00,00,04,03,04,00,00,00,00,04,04,00,00,00,00,00,00,04,00,04,04,03,04,03,03,04,03,00,00,00,00,00,00,03,04,03,03,04,03,04,04,00,04,00,00,00,00,00,00,00,00
+DATA 00,04,04,04,00,00,00,00,04,00,00,00,00,04,04,04,00,00,00,00,00,04,04,00,00,00,04,04,04,04,04,04,04,00,00,00,00,04,04,04,04,04,04,04,00,00,00,04,04,00,00,00,00,00,00,00
+DATA 00,00,04,04,00,00,00,04,04,04,00,00,00,04,04,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
+
+DIM centralturret%(100)
+DIM centralturretfire%(100)
+DIM playerprojectile1%(10)
+DIM playerprojectile2%(10)
+DIM leftturret%(100)
+DIM leftturretfire%(100)
+DIM rightturret%(100)
+DIM rightturretfire%(100)
+
+DIM playerprojectilespeed, playerprojectilenumber, playerprojectilediagspeed AS INTEGER 'player projectile speeds and max number that can be onscreen at any one time
+DIM SHARED playerprojectileactive(9), playerprojectilex(9), playerprojectiley(9), playerprojectiledirection(9), playerprojectileanimation(9) 'the arrays that hold the data for the player's projectiles
+
+playerprojectilenumber = 9
+playerprojectilespeed = 8
+playerprojectilediagspeed = 6
+
+DIM leftturretx, leftturrety, leftturretanimation, centralturretx, centralturrety, centralturretanimation, rightturretx, rightturrety, rightturretanimation AS INTEGER 'locations for the turrets
+
+leftturretx = 10
+leftturrety = 175
+leftturretanimation = 0
+centralturretx = 145
+centralturrety = 175
+centralturretanimation = 0
+rightturretx = 300
+rightturrety = 175
+rightturretanimation = 0
+
+SCREEN 7 '320x by 200y pixels
+
+FOR Y = 0 TO 28  ' For each row                                                                                                                                                                                                   
+  FOR X = 0 TO 55  ' For each column
+    READ z
+    PSET (X, Y), z 'prints all initial sprites then we need to capture them for re-use
+  NEXT X
+NEXT Y
+
+GET (0,2)-(15,13), centralturret% 'capturin the sprites
+GET (0,16)-(15,29), centralturretfire%
+GET (17,2)-(19,4), playerprojectile1%
+GET (17,6)-(19,8), playerprojectile2%
+GET (21,2)-(33,13), leftturret%
+GET (21,16)-(34,28), leftturretfire%
+GET (35,2)-(47,13), rightturret%
+GET (35,16)-(48,28), rightturretfire%
+
+SLEEP
+
+
+
+CLS
+
+PUT (leftturretx,leftturrety), leftturret%
+PUT (centralturretx,centralturrety), centralturret%
+PUT (rightturretx,rightturrety), rightturret% 
+
+DO
+
+	IF leftturretanimation = 1 THEN 'the three IFs below swap back to the turret idle animation, checks every frame
+		PUT (leftturretx,leftturrety), leftturretfire%
+		PUT (leftturretx,leftturrety), leftturret%
+		leftturretanimation = 0
+	ENDIF
+	
+	IF centralturretanimation = 1 THEN
+		PUT (centralturretx,centralturrety), centralturretfire%
+		PUT (centralturretx,centralturrety), centralturret%
+		centralturretanimation = 0
+	ENDIF
+	
+	IF rightturretanimation = 1 THEN
+		PUT (rightturretx,rightturrety), rightturretfire%
+		PUT (rightturretx,rightturrety), rightturret%
+		rightturretanimation = 0
+	ENDIF
+
+	FOR i = 1 TO playerprojectilenumber 'the part that keeps track of fired projectiles yo
+		IF playerprojectileactive(i) = 1 AND playerprojectiledirection(i) = 1 AND playerprojectileanimation(i) = 0 THEN 'shooting the left turret projectile which is direction 1
+				PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1% 'erases the original image with a put
+				playerprojectilex(i) = playerprojectilex(i) + playerprojectilediagspeed 'diagnal speed value is less than the regular speed value
+				playerprojectiley(i) = playerprojectiley(i) - playerprojectilediagspeed
+				playerprojectileanimation(i) = 1 'sets the new animation
+					IF playerprojectilex(i) > 315 OR playerprojectiley(i) < 5 THEN
+							playerprojectileactive(i) = 0 'turns the projectile off
+						ELSE
+							PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2% 'new animation swap
+					ENDIF
+			ELSEIF playerprojectileactive(i) = 1 AND playerprojectiledirection(i) = 1 AND playerprojectileanimation(i) = 1 THEN 'other animation for shooting to the right from the left turret
+				PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2% 'erases the original image with a put
+				playerprojectilex(i) = playerprojectilex(i) + playerprojectilediagspeed 'diagnal speed value is less than the regular speed value
+				playerprojectiley(i) = playerprojectiley(i) - playerprojectilediagspeed
+				playerprojectileanimation(i) = 0 'sets the new animation
+					IF playerprojectilex(i) > 315 OR playerprojectiley(i) < 5 THEN
+							playerprojectileactive(i) = 0 'turns the projectile off
+						ELSE
+							PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1% 'new animation swap
+					ENDIF
+			ELSEIF playerprojectileactive(i) = 1 AND playerprojectiledirection(i) = 2 AND playerprojectileanimation(i) = 0 THEN 'shooting from the center horizontally
+				PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1% 'erases the original image with a put
+				playerprojectiley(i) = playerprojectiley(i) - playerprojectilespeed 'regular speed, faster than diagonal
+				playerprojectileanimation(i) = 1 'sets the new animation
+					IF playerprojectiley(i) < 5 THEN
+							playerprojectileactive(i) = 0 'turns the projectile off
+						ELSE
+							PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2% 'new animation swap
+					ENDIF
+			ELSEIF playerprojectileactive(i) = 1 AND playerprojectiledirection(i) = 2 AND playerprojectileanimation(i) = 1 THEN 'shooting from the center horizontally, animation swap
+				PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2% 'erases the original image with a put
+				playerprojectiley(i) = playerprojectiley(i) - playerprojectilespeed 'regular speed, faster than diagonal
+				playerprojectileanimation(i) = 0 'sets the new animation
+					IF playerprojectiley(i) < 5 THEN
+							playerprojectileactive(i) = 0 'turns the projectile off
+						ELSE
+							PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1% 'new animation swap
+					ENDIF
+			ELSEIF playerprojectileactive(i) = 1 AND playerprojectiledirection(i) = 3 AND playerprojectileanimation(i) = 0 THEN 'shooting from the right turret, headin left
+				PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1% 'erases the original image with a put
+				playerprojectilex(i) = playerprojectilex(i) - playerprojectilediagspeed 'diagnal speed value is less than the regular speed value, minus because it is going right
+				playerprojectiley(i) = playerprojectiley(i) - playerprojectilediagspeed
+				playerprojectileanimation(i) = 1 'sets the new animation
+					IF playerprojectilex(i) < 5 OR playerprojectiley(i) < 5 THEN
+							playerprojectileactive(i) = 0 'turns the projectile off
+						ELSE
+							PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2% 'new animation swap
+					ENDIF
+			ELSEIF playerprojectileactive(i) = 1 AND playerprojectiledirection(i) = 3 AND playerprojectileanimation(i) = 1 THEN 'shooting from the right turret, headin left
+				PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2% 'erases the original image with a put
+				playerprojectilex(i) = playerprojectilex(i) - playerprojectilediagspeed 'diagnal speed value is less than the regular speed value, minus because it is going right
+				playerprojectiley(i) = playerprojectiley(i) - playerprojectilediagspeed
+				playerprojectileanimation(i) = 0 'sets the new animation
+					IF playerprojectilex(i) < 5 OR playerprojectiley(i) < 5 THEN
+							playerprojectileactive(i) = 0 'turns the projectile off
+						ELSE
+							PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1% 'new animation swap
+					ENDIF
+		ENDIF
+	NEXT i
+	
+	uin$ = INKEY$
+		SELECT CASE uin$
+			CASE "1" '1 for firing the left turret
+				FOR i = 1 TO playerprojectilenumber 
+					IF playerprojectileactive(i) = 0 THEN
+						playerprojectileactive(i) = 1
+						playerprojectileanimation(i) = 0
+						playerprojectiledirection(i) = 1
+						playerprojectilex(i) = leftturretx + 15
+						playerprojectiley(i) = leftturrety - 3
+						leftturretanimation = 1
+						PUT (leftturretx,leftturrety), leftturret%
+						PUT (leftturretx,leftturrety), leftturretfire% 'animation swaps to the firing turret image
+						PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
+						EXIT FOR
+					ENDIF
+				NEXT i
+			CASE "2" '2 for firing the central turret
+				FOR i = 1 TO playerprojectilenumber 
+					IF playerprojectileactive(i) = 0 THEN
+						playerprojectileactive(i) = 1
+						playerprojectileanimation(i) = 0
+						playerprojectiledirection(i) = 2
+						playerprojectilex(i) = centralturretx + 8
+						playerprojectiley(i) = centralturrety - 2
+						centralturretanimation = 1
+						PUT (centralturretx,centralturrety), centralturret%
+						PUT (centralturretx,centralturrety), centralturretfire% 'animation swaps to the firing turret image
+						PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
+						EXIT FOR
+					ENDIF
+				NEXT i
+			CASE "3" '2 for firing the right turret (bullet travels to the left)
+				FOR i = 1 TO playerprojectilenumber 
+					IF playerprojectileactive(i) = 0 THEN
+						playerprojectileactive(i) = 1
+						playerprojectileanimation(i) = 0
+						playerprojectiledirection(i) = 3
+						playerprojectilex(i) = rightturretx - 2
+						playerprojectiley(i) = rightturrety - 3
+						rightturretanimation = 1
+						PUT (rightturretx,rightturrety), rightturret%
+						PUT (rightturretx,rightturrety), rightturretfire% 'animation swaps to the firing turret image
+						PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
+						EXIT FOR
+					ENDIF
+				NEXT i
+			
+			CASE CHR$(0) + CHR$(83): GOTO 1 'goes to 1 and ends the game
+	
+	END SELECT
+				
+	FOR I = 1 to 100: NEXT I 'timer for gameplay loop. Smaller number = faster game	
+
+LOOP
+
+1 PRINT "Game over"
+END
+
+
