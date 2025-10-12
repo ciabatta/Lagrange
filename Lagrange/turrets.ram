@@ -90,19 +90,19 @@ PUT (rightturretx,rightturrety), rightturret%
 DO
 
 	IF leftturretanimation = 1 THEN 'the three IFs below swap back to the turret idle animation, checks every frame
-		PUT (leftturretx,leftturrety), leftturretfire%
+		PUT (leftturretx,leftturrety - 1), leftturretfire% 'position offset for the firing animation
 		PUT (leftturretx,leftturrety), leftturret%
 		leftturretanimation = 0
 	ENDIF
 	
 	IF centralturretanimation = 1 THEN
-		PUT (centralturretx,centralturrety), centralturretfire%
+		PUT (centralturretx,centralturrety - 2), centralturretfire%
 		PUT (centralturretx,centralturrety), centralturret%
 		centralturretanimation = 0
 	ENDIF
 	
 	IF rightturretanimation = 1 THEN
-		PUT (rightturretx,rightturrety), rightturretfire%
+		PUT (rightturretx - 1,rightturrety - 1), rightturretfire%
 		PUT (rightturretx,rightturrety), rightturret%
 		rightturretanimation = 0
 	ENDIF
@@ -181,7 +181,7 @@ DO
 						playerprojectiley(i) = leftturrety - 3
 						leftturretanimation = 1
 						PUT (leftturretx,leftturrety), leftturret%
-						PUT (leftturretx,leftturrety), leftturretfire% 'animation swaps to the firing turret image
+						PUT (leftturretx,leftturrety - 1), leftturretfire% 'animation swaps to the firing turret image, position offset for the firing animation
 						PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
 						EXIT FOR
 					ENDIF
@@ -196,7 +196,7 @@ DO
 						playerprojectiley(i) = centralturrety - 2
 						centralturretanimation = 1
 						PUT (centralturretx,centralturrety), centralturret%
-						PUT (centralturretx,centralturrety), centralturretfire% 'animation swaps to the firing turret image
+						PUT (centralturretx,centralturrety - 2), centralturretfire% 'animation swaps to the firing turret image
 						PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
 						EXIT FOR
 					ENDIF
@@ -211,7 +211,7 @@ DO
 						playerprojectiley(i) = rightturrety - 3
 						rightturretanimation = 1
 						PUT (rightturretx,rightturrety), rightturret%
-						PUT (rightturretx,rightturrety), rightturretfire% 'animation swaps to the firing turret image
+						PUT (rightturretx - 1,rightturrety - 1), rightturretfire% 'animation swaps to the firing turret image
 						PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
 						EXIT FOR
 					ENDIF
