@@ -89,8 +89,8 @@ DATA 00,00,00,00,00,00,00,00,00,00,00,00,06,06,06,06,06,00,00,00,00,00,00,00,00,
 DATA 00,00,00,00,00,00,00,00,00,00,00,00,00,06,06,06,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,06,06,06,06,00,00,00,00,00,06,06,06,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,06,06,06,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
 DATA 00,00,00,00,00,00,00,00,00,00,00,00,00,00,06,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,06,06,00,00,00,00,00,00,00,06,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,06,06,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
 
-'log: GET the big asteroid and the explosion images. Animate their movements. We then have to modify the randomized
-' timers for everyone then finally integrate it with the turrets. Explosions done though!
+'log: We are at around line 390. We now are animating the big asteroid. Just got done with the first check to see if it goes off screen on the right after coming from the left
+' Remember, the big asteroid has two animation states, damaged and undamaged, so we kinda have to double the code. Uploading this to github under a different version
 
 DIM asteroid1%(50)
 DIM asteroid2%(50)
@@ -100,14 +100,26 @@ DIM cometleft1%(100) 'sprites for the comets which spawn on the left side and he
 DIM cometleft2%(100)
 DIM cometright1%(100) 'sprites for the comets that spawn on the right and head left
 DIM cometright2%(100)
+DIM bigasteroid1%(200)
+DIM bigasteroid2%(200)
+DIM bigasteroid3%(200)
+DIM bigasteroid4%(200)
+DIM bigasteroiddamaged1%(200)
+DIM bigasteroiddamaged2%(200)
+DIM bigasteroiddamaged3%(200)
+DIM bigasteroiddamaged4%(200)
+DIM spacejunkexplosion1%(100)
+DIM spacejunkexplosion2%(150)
 
 RANDOMIZE TIMER
 
-DIM asteroidspawnside,cometspawnside, asteroidspeed, cometspeed, spawntimer, asteroidtype, maxasteroids, maxcomets,cometspawntimer AS INTEGER
+DIM asteroidspawnside, cometspawnside, asteroidspeed, cometspeed, bigasteroidspawntimer, asteroidtype, maxasteroids, maxcomets, cometspawntimer, maxbigasteroids, bigasteroidspeed, bigasteroidspawnside AS INTEGER
 
 DIM SHARED asteroidactive(5),asteroidx(5),asteroidy(5),asteroiddirection(5),asteroidanimation(5) 'values for asteroids
 
 DIM SHARED cometactive(2),cometx(2),comety(2),cometdirection(2),cometanimation(2) 'values for comets. They only have 2 animation states instead of 4 btw
+
+DIM SHARED bigasteroidactive(3),bigasteroidx(3),bigasteroidy(3),bigasteroiddirection(3),bigasteroidanimation(3),bigasteroiddamaged(3) 'the last value is for seeing if the asteroid has been damaged or not for a new set of animations. ugh
 
 asteroidspawntimer = 0
 maxasteroids = 5
@@ -115,6 +127,9 @@ asteroidspeed = 4
 cometspawntimer = 0
 cometspeed = 8
 maxcomets = 2
+maxbigasteroids = 3
+bigasteroidspeed = 5
+bigasteroidspawntimer = 0
                                                                                                                         
 SCREEN 7                                                                                                                 
                                                                                                                          
@@ -133,6 +148,16 @@ GET (22,0)-(37,11), cometleft1% 'spawns on the left, goes right, small tail
 GET (18,13)-(37,24), cometleft2% 'spawns on the left, goes right, big tail
 GET (40,0)-(59,11), cometright1% 'spawns on the right, goes left, small tail
 GET (40,13)-(55,24), cometright2% 'spawns on the right, goes left, big tail
+GET (0,60)-(20,87), bigasteroiddamaged1%
+GET (42,60)-(62,87), bigasteroiddamaged2% 'two sets of big asteroid sprites, one for the damaged ones, and one for undamaged
+GET (21,60)-(41,87), bigasteroiddamaged3%
+GET (63,60)-(83,87), bigasteroiddamaged4%
+GET (61,0)-(81,27 ), bigasteroid1%
+GET (22,30)-(42,57), bigasteroid2%
+GET (0,30)-(19,57), bigasteroid3%
+GET (83,0)-(103,27), bigasteroid4%
+GET (65,33)-(75,45), spacejunkexplosion1% 'this explosion will be used for all "space junk" like asteroids, comets, debirs, etc
+GET (46,32)-(62,50), spacejunkexplosion2%
 
 SLEEP
 
@@ -142,6 +167,7 @@ DO
 
 	asteroidspawntimer = asteroidspawntimer + 5 'the timer for when an asteroid spawns. max can be set below
 	cometspawntimer = cometspawntimer + 5 'same as the asteroid spawn timer, can be set in its block below
+	bigasteroidspawntimer = bigasteroidspawntimer + 5
 
 	IF asteroidspawntimer = 100 THEN 'set the timer here. bigger number = longer time between spawns. 
 		asteroidspawntimer = 0
@@ -185,6 +211,31 @@ DO
 							cometx(i) = 299
 							comety(i) = 15
 							PUT (299,15), cometright1%
+					ENDIF
+				EXIT FOR
+			ENDIF
+		NEXT i
+	ENDIF
+	
+	IF bigasteroidspawntimer = 400 THEN 'set the timer here. bigger number = longer time between spawns. 
+		bigasteroidspawntimer = 0
+		bigasteroidspawnside = INT(RND * 2) + 1 'randomizes what side the big asteroid spawns on. Either 1 or 2. 1 is left, 2 is right
+		FOR i = 1 TO maxbigasteroids
+			IF bigasteroidactive(i) = 0 THEN
+				bigasteroidactive(i) = 1
+				bigasteroiddamaged(i) = 0
+					IF bigasteroidspawnside = 1 THEN 'from the left
+							bigasteroiddirection(i) = 1 '1 = moving from left to right
+							bigasteroidanimation(i) = 1
+							bigasteroidx(i) = 5
+							bigasteroidy(i) = 30
+							PUT (5,30), bigasteroid1%
+						ELSEIF bigasteroidspawnside = 2 THEN ' from the right
+							bigasteroiddirection(i) = 2
+							bigasteroidanimation(i) = 4
+							bigasteroidx(i) = 298
+							bigasteroidy(i) = 30
+							PUT (298,30), bigasteroid4%
 					ENDIF
 				EXIT FOR
 			ENDIF
@@ -281,8 +332,6 @@ DO
 		ENDIF
 	NEXT i
 	
-	
-	
 	FOR i = 1 TO maxcomets
 		IF cometactive(i) = 1 AND cometdirection(i) = 1 THEN
 				cometx(i) = cometx(i) + cometspeed
@@ -336,6 +385,54 @@ DO
 				ENDIF
 		ENDIF
 	NEXT i
+
+	FOR i = 1 TO maxbigasteroids
+		IF bigasteroidactive(i) = 1 AND bigasteroiddirection(i) = 1 THEN
+				bigasteroidx(i) = bigasteroidx(i) + bigasteroidspeed
+				IF bigasteroidx(i) > 298 THEN
+				bigasteroiddirection(i) = 2
+				bigasteroidy(i) = bigasteroidy(i) + 20
+					IF bigasteroidanimation(i) = 4 AND bigasteroiddamaged(i) = 0 THEN 'deletes the asteroids when they "go off screen"
+							PUT (bigasteroidx(i) - bigasteroidspeed, bigasteroidy(i) - 20), bigasteroid4% 'remember, we need to check for the big asteroid damaged state too, so this will double the length of the code block...
+							bigasteroidx(i) = 298
+							bigasteroidanimation(i) = 4
+							PUT (bigasteroidx(i), bigasteroidy(i)), bigasteroid4%
+						ELSEIF bigasteroidanimation(i) = 3 AND bigasteroiddamaged(i) = 0 THEN
+							PUT (bigasteroidx(i) - bigasteroidspeed, bigasteroidy(i) - 20), bigasteroid3%
+							bigasteroidx(i) = 298
+							asteroidanimation(i) = 4
+							PUT (bigasteroidx(i), bigasteroidy(i)), bigasteroid4%
+						ELSEIF bigasteroidanimation(i) = 2 AND bigasteroiddamaged(i) = 0 THEN
+							PUT (bigasteroidx(i) - bigasteroidspeed, bigasteroidy(i) - 20), bigasteroid2%
+							bigasteroidx(i) = 298
+							bigasteroidanimation(i) = 4
+							PUT (bigasteroidx(i), bigasteroidy(i)), bigasteroid4%
+						ELSEIF bigasteroidanimation(i) = 1 AND bigasteroiddamaged(i) = 0 THEN
+							PUT (bigasteroidx(i) - bigasteroidspeed, bigasteroidy(i) - 20), bigasteroid1%
+							bigasteroidx(i) = 298
+							bigasteroidanimation(i) = 4
+							PUT (bigasteroidx(i), bigasteroidy(i)), bigasteroid4% 
+						ELSEIF bigasteroidanimation(i) = 4 AND bigasteroiddamaged(i) = 1 THEN 'starting the damaged section of the offscreen animation!
+							PUT (bigasteroidx(i) - bigasteroidspeed, bigasteroidy(i) - 20), bigasteroiddamaged4% 'remember, we need to check for the big asteroid damaged state too, so this will double the length of the code block...
+							bigasteroidx(i) = 298
+							bigasteroidanimation(i) = 4
+							PUT (bigasteroidx(i), bigasteroidy(i)), bigasteroiddamaged4%
+						ELSEIF bigasteroidanimation(i) = 3 AND bigasteroiddamaged(i) = 1 THEN
+							PUT (bigasteroidx(i) - bigasteroidspeed, bigasteroidy(i) - 20), bigasteroiddamaged3%
+							bigasteroidx(i) = 298
+							asteroidanimation(i) = 4
+							PUT (bigasteroidx(i), bigasteroidy(i)), bigasteroiddamaged4%
+						ELSEIF bigasteroidanimation(i) = 2 AND bigasteroiddamaged(i) = 1 THEN
+							PUT (bigasteroidx(i) - bigasteroidspeed, bigasteroidy(i) - 20), bigasteroiddamaged2%
+							bigasteroidx(i) = 298
+							bigasteroidanimation(i) = 4
+							PUT (bigasteroidx(i), bigasteroidy(i)), bigasteroiddamaged4%
+						ELSEIF bigasteroidanimation(i) = 1 AND bigasteroiddamaged(i) = 1 THEN
+							PUT (bigasteroidx(i) - bigasteroidspeed, bigasteroidy(i) - 20), bigasteroiddamaged1%
+							bigasteroidx(i) = 298
+							bigasteroidanimation(i) = 4
+							PUT (bigasteroidx(i), bigasteroidy(i)), bigasteroiddamaged4% 
+					ENDIF
 
 	uin$ = INKEY$ 'gotta be able to close the program lol
 			SELECT CASE uin$
