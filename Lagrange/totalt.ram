@@ -119,7 +119,7 @@ DATA 00,04,04,00,00,00,00,04,03,04,00,00,00,00,04,04,00,00,00,00,00,00,04,00,04,
 DATA 00,04,04,04,00,00,00,00,04,00,00,00,00,04,04,04,00,00,00,00,00,04,04,00,00,00,04,04,04,04,04,04,04,00,00,00,00,04,04,04,04,04,04,04,00,00,00,04,04,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
 DATA 00,00,04,04,00,00,00,04,04,04,00,00,00,04,04,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00
 
-'log: next we need to implement the big asteroids and the comets collision with the projectiles.
+'log: We just need to implement collision with the big asteroids! Then on to other stuff!
 
 DIM asteroid1%(50)
 DIM asteroid2%(50)
@@ -162,13 +162,13 @@ DIM SHARED cometactive(2),cometx(2),comety(2),cometdirection(2),cometanimation(2
 
 DIM SHARED bigasteroidactive(3),bigasteroidx(3),bigasteroidy(3),bigasteroiddirection(3),bigasteroidanimation(3),bigasteroiddamaged(3),bigasteroiddropped(3) 'the last value is for seeing if the asteroid has been damaged or not for a new set of animations. ugh
 
-DIM SHARED playerprojectileactive(9), playerprojectilex(9), playerprojectiley(9), playerprojectiledirection(9), playerprojectileanimation(9) 'the arrays that hold the data for the player's projectiles
+DIM SHARED playerprojectileactive(6), playerprojectilex(6), playerprojectiley(6), playerprojectiledirection(6), playerprojectileanimation(6) 'the arrays that hold the data for the player's projectiles
 
 DIM maxexplosions AS INTEGER 'the number of explosions on screen. gotta make it a big number, like 20 or something
 
 DIM SHARED explosionx(10), explosiony(10), explosionactive(10), explosionanimation(10) 'the data for the explosions 
 
-playerprojectilenumber = 9
+playerprojectilenumber = 6
 playerprojectilespeed = 8
 playerprojectilediagspeed = 6
 
@@ -183,7 +183,7 @@ rightturrety = 175
 rightturretanimation = 0
 
 asteroidspawntimer = 0
-maxasteroids = 3
+maxasteroids = 2
 asteroidspeed = 4
 cometspawntimer = 0
 cometspeed = 8
@@ -262,6 +262,7 @@ DO
 	ENDIF
 	
 	asteroidspawntimer = asteroidspawntimer + 5 'the timer for when an asteroid spawns. max can be set below
+	cometspawntimer = cometspawntimer + 5 'same as the asteroid spawn timer, can be set in its block below
 	
 	IF asteroidspawntimer = 100 THEN 'set the timer here. bigger number = longer time between spawns. 
 		asteroidspawntimer = 0
@@ -380,6 +381,88 @@ DO
 				ENDIF
 		ENDIF
 	NEXT i
+	
+	IF cometspawntimer = 300 THEN 'set the timer here. bigger number = longer time between spawns. 
+		cometspawntimer = 0
+		cometspawnside = INT(RND * 2) + 1 'randomizes what side the comet spawns on. Either 1 or 2. 1 is left, 2 is right
+		FOR i = 1 TO maxcomets
+			IF cometactive(i) = 0 THEN
+				cometactive(i) = 1
+					IF cometspawnside = 1 THEN 'from the left
+							cometdirection(i) = 1
+							cometanimation(i) = 1
+							cometx(i) = 5
+							comety(i) = 15
+							PUT (5,15), cometleft1%
+						ELSEIF cometspawnside = 2 THEN ' from the right
+							cometdirection(i) = 2
+							cometanimation(i) = 3
+							cometx(i) = 299
+							comety(i) = 15
+							PUT (299,15), cometright1%
+					ENDIF
+				EXIT FOR
+			ENDIF
+		NEXT i
+	ENDIF
+	
+	FOR i = 1 TO maxcomets
+		IF cometactive(i) = 1 AND cometdirection(i) = 1 THEN 'comets moving from left to right
+				cometx(i) = cometx(i) + cometspeed
+				IF cometx(i) > 300 THEN
+						cometdirection(i) = 2
+						comety(i) = comety(i) + 30
+						IF comety(i) > 170 THEN
+								cometactive(i) = 0
+							ELSEIF cometanimation(i) = 1 AND cometactive(i) = 1 THEN
+								PUT (cometx(i) - cometspeed,comety(i) - 30), cometleft1%
+								cometx(i) = 299
+								cometanimation(i) = 3
+								PUT (cometx(i),comety(i)),cometright1%
+							ELSEIF cometanimation(i) = 2 AND cometactive(i) = 1 THEN
+								PUT (cometx(i) - cometspeed,comety(i) - 30), cometleft2%
+								cometx(i) = 299
+								cometanimation(i) = 3
+								PUT (cometx(i),comety(i)),cometright1%
+						ENDIF				
+					ELSEIF cometanimation(i) = 1 THEN
+						PUT (cometx(i) - cometspeed,comety(i)), cometleft1%
+						cometanimation(i) = 2
+						PUT (cometx(i),comety(i)), cometleft2%
+					ELSEIF cometanimation(i) = 2 THEN
+						PUT (cometx(i) - cometspeed,comety(i)), cometleft2%
+						cometanimation(i) = 1
+						PUT (cometx(i),comety(i)), cometleft1%
+				ENDIF
+			ELSEIF cometactive(i) = 1 AND cometdirection(i) = 2 THEN
+				cometx(i) = cometx(i) - cometspeed
+				IF cometx(i) < 9 THEN
+						cometdirection(i) = 1
+						comety(i) = comety(i) + 30 
+						IF comety(i) > 170 THEN
+								cometactive(i) = 0
+							ELSEIF cometanimation(i) = 3 AND cometactive(i) = 1 THEN
+								PUT (cometx(i) + cometspeed,comety(i) - 30), cometright1%
+								cometx(i) = 5
+								cometanimation(i) = 1
+								PUT (cometx(i),comety(i)), cometleft1%
+							ELSEIF cometanimation(i) = 4 AND cometactive(i) = 1 THEN
+								PUT (cometx(i) + cometspeed,comety(i) - 30), cometright2%
+								cometx(i) = 5
+								cometanimation(i) = 1
+								PUT (cometx(i),comety(i)), cometleft1%
+						ENDIF				
+					ELSEIF cometanimation(i) = 3 THEN
+						PUT (cometx(i) + cometspeed,comety(i)), cometright1%
+						cometanimation(i) = 4
+						PUT (cometx(i),comety(i)), cometright2%
+					ELSEIF cometanimation(i) = 4 THEN
+						PUT (cometx(i) + cometspeed,comety(i)), cometright2%
+						cometanimation(i) = 3
+						PUT (cometx(i),comety(i)), cometright1%
+				ENDIF
+		ENDIF
+	NEXT i
 
 	FOR i = 1 TO playerprojectilenumber 'the part that keeps track of fired projectiles yo
 		IF playerprojectileactive(i) = 1 AND playerprojectiledirection(i) = 1 AND playerprojectileanimation(i) = 0 THEN 'shooting the left turret projectile which is direction 1
@@ -454,7 +537,7 @@ DO
 		ENDIF
 	NEXT i
 	
-	FOR i = 1 TO playerprojectilenumber
+	FOR i = 1 TO playerprojectilenumber 'checks the hits against all objects
 		IF playerprojectileactive(i) = 1 THEN
 			FOR j = 1 TO maxasteroids 'checks to see if the center of the projectile is within the dimensions of the "box" which is the asteroid
 				IF asteroidactive(j) = 1 AND (playerprojectilex(i) + 1) >= asteroidx(j) AND (playerprojectilex(i) + 1) <= (asteroidx(j) + 8) AND (playerprojectiley(i) + 1) >= asteroidy(j) AND (playerprojectiley(i) + 1) <= (asteroidy(j) + 6) THEN 
@@ -486,6 +569,85 @@ DO
 						NEXT k
 				ENDIF
 			NEXT j
+			FOR l = 1 TO maxcomets 'the comets are a bit weird. We have to check them differently because the tails on them really offset the x y coordinates. That's why this block is so long
+				IF cometactive(l) = 1 AND cometdirection(l) = 1 AND cometanimation(l) = 1 AND (playerprojectilex(i) + 1) >= (cometx(l) + 8) AND (playerprojectilex(i) + 1) <= (cometx(l) + 17) AND (playerprojectiley(i) + 1) >= comety(l) AND (playerprojectiley(i) + 1) <= (comety(l) + 12) THEN
+						playerprojectileactive(i) = 0 'this checks for the comet going right from the left with a short tail
+						cometactive(l) = 0
+							IF playerprojectileanimation(i) = 0 THEN 'deletes the player projectile and the asteroid based on animation state
+									PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
+								ELSEIF playerprojectileanimation(i) = 1 THEN
+									PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2%
+							ENDIF
+						PUT (cometx(l),comety(l)), cometleft2%
+						PUT (cometx(l) + 8,comety(l)), spacejunkexplosion1%
+						FOR k = 1 TO maxexplosions 'sets the x and y value for the explosion that will be placed so that in a different loop we can animation swap it
+							IF explosionactive(k) = 0 THEN
+								explosionactive(k) = 1
+								explosionanimation(k) = 1
+								explosionx(k) = cometx(l) + 8
+								explosiony(k) = comety(l)
+								EXIT FOR
+							ENDIF
+						NEXT k
+					ELSEIF cometactive(l) = 1 AND cometdirection(l) = 1 AND cometanimation(l) = 1 AND (playerprojectilex(i) + 1) >= (cometx(l) + 11) AND (playerprojectilex(i) + 1) <= (cometx(l) + 21) AND (playerprojectiley(i) + 1) >= comety(l) AND (playerprojectiley(i) + 1) <= (comety(l) + 12) THEN
+						playerprojectileactive(i) = 0 'this checks for the comet going right from the left with a long tail
+						cometactive(l) = 0
+							IF playerprojectileanimation(i) = 0 THEN 'deletes the player projectile and the asteroid based on animation state
+									PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
+								ELSEIF playerprojectileanimation(i) = 1 THEN
+									PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2%
+							ENDIF
+						PUT (cometx(l),comety(l)), cometleft1%
+						PUT (cometx(l) + 12,comety(l)), spacejunkexplosion1%
+						FOR k = 1 TO maxexplosions 'sets the x and y value for the explosion that will be placed so that in a different loop we can animation swap it
+							IF explosionactive(k) = 0 THEN
+								explosionactive(k) = 1
+								explosionanimation(k) = 1
+								explosionx(k) = cometx(l) + 12
+								explosiony(k) = comety(l)
+								EXIT FOR
+							ENDIF
+						NEXT k
+					ELSEIF cometactive(l) = 1 AND cometdirection(l) = 2 AND cometanimation(l) = 3 AND (playerprojectilex(i) + 1) >= cometx(l) AND (playerprojectilex(i) + 1) <= (cometx(l) + 10 ) AND (playerprojectiley(i) + 1) >= comety(l) AND (playerprojectiley(i) + 1) <= (comety(l) + 12) THEN
+						playerprojectileactive(i) = 0 'this checks for the comet going left from the right side with a short tail
+						cometactive(l) = 0
+							IF playerprojectileanimation(i) = 0 THEN 'deletes the player projectile and the asteroid based on animation state
+									PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
+								ELSEIF playerprojectileanimation(i) = 1 THEN
+									PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2%
+							ENDIF
+						PUT (cometx(l),comety(l)), cometright1%
+						PUT (cometx(l) + 5,comety(l)), spacejunkexplosion1%
+						FOR k = 1 TO maxexplosions 'sets the x and y value for the explosion that will be placed so that in a different loop we can animation swap it
+							IF explosionactive(k) = 0 THEN
+								explosionactive(k) = 1
+								explosionanimation(k) = 1
+								explosionx(k) = cometx(l) + 5
+								explosiony(k) = comety(l)
+								EXIT FOR
+							ENDIF
+						NEXT k
+					ELSEIF cometactive(l) = 1 AND cometdirection(l) = 2 AND cometanimation(l) = 4 AND (playerprojectilex(i) + 1) >= cometx(l) AND (playerprojectilex(i) + 1) <= (cometx(l) + 10) AND (playerprojectiley(i) + 1) >= comety(l) AND (playerprojectiley(i) + 1) <= (comety(l) + 12) THEN
+						playerprojectileactive(i) = 0 'this checks for the comet going right from the left with a long tail
+						cometactive(l) = 0
+							IF playerprojectileanimation(i) = 0 THEN 'deletes the player projectile and the asteroid based on animation state
+									PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile1%
+								ELSEIF playerprojectileanimation(i) = 1 THEN
+									PUT (playerprojectilex(i),playerprojectiley(i)), playerprojectile2%
+							ENDIF
+						PUT (cometx(l),comety(l)), cometright2%
+						PUT (cometx(l) + 5,comety(l)), spacejunkexplosion1%
+						FOR k = 1 TO maxexplosions 'sets the x and y value for the explosion that will be placed so that in a different loop we can animation swap it
+							IF explosionactive(k) = 0 THEN
+								explosionactive(k) = 1
+								explosionanimation(k) = 1
+								explosionx(k) = cometx(l) + 5
+								explosiony(k) = comety(l)
+								EXIT FOR
+							ENDIF
+						NEXT k
+				ENDIF
+			NEXT l
 		END IF
 	NEXT i
 	
